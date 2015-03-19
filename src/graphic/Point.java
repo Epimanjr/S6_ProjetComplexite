@@ -36,8 +36,8 @@ public class Point {
      * @return Objet Point
      */
     public static Point getRandomPoint() {
-        int randomX = (int) (Math.random() * Config.width);
-        int randomY = (int) (Math.random() * Config.height);
+        int randomX = (int) (Math.random() * (Config.width  - Config.largeurMinimale));
+        int randomY = (int) (Math.random() * (Config.height - Config.hauteurMinimale));
         return new Point(randomX, randomY);
     }
 

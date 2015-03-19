@@ -43,9 +43,15 @@ public class Rectangle {
      * @return Objet Rectangle
      */
     public static Rectangle getRandomRectangle() {
+        // Point supérieur gauche
         Point p1 = Point.getRandomPoint();
+        // Largeur du rectangle
         int width = (int) (Math.random() * (Config.width - p1.getX()));
+        width = (width < Config.largeurMinimale) ? Config.largeurMinimale : width;
+        // Hauteur du rectangle
         int height = (int) (Math.random() * (Config.height - p1.getY()));
+        height = (height < Config.hauteurMinimale) ? Config.hauteurMinimale : height;
+        // Création !
         return new Rectangle(p1, width, height);
     }
 

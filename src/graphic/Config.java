@@ -18,4 +18,9 @@ public class Config {
      * Couleur de la bordure du rectangle.
      */
     public static Color couleurRectangle = new Color(0, 204, 0);
+    
+    /**
+     * Dimension minimale d'un rectangle.
+     */
+    public static int largeurMinimale = 15, hauteurMinimale = 5;
 }

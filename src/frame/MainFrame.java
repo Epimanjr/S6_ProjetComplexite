@@ -211,7 +211,8 @@ public class MainFrame extends javax.swing.JFrame {
 
             // Affichage des résultats
             long debut = System.currentTimeMillis();
-            int nb = listeRectangles.toutesLesPaires();
+            //int nb = listeRectangles.toutesLesPaires();
+            int nb = listeRectangles.balayage();
             long diff = System.currentTimeMillis() - debut;
             int nbPairesTotal = this.nombre * (this.nombre - 1) / 2;
             System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");

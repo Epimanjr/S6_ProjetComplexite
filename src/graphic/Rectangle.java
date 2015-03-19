@@ -23,6 +23,11 @@ public class Rectangle {
      * Hauteur du rectangle.
      */
     private int height;
+    
+    /**
+     * Coordonnées nécessaires pour la résolution du problème.
+     */
+    public int x1, y1, x2, y2;
 
     /**
      * Créer un rectangle à partir d'un point et de ses dimensions
@@ -35,6 +40,10 @@ public class Rectangle {
         this.superieurGauche = superieurGauche;
         this.width = width;
         this.height = height;
+        x1 = superieurGauche.getX();
+        y1 = superieurGauche.getY() + height;
+        x2 = superieurGauche.getX() + width;
+        y2 = superieurGauche.getY();
     }
 
     /**

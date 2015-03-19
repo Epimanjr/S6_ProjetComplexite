@@ -1,9 +1,11 @@
-
 package frame;
 
 import graphic.Config;
+import graphic.ListeRectangle;
 import graphic.Rectangle;
 import java.awt.Dimension;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -12,6 +14,11 @@ import javax.swing.SwingConstants;
  * @author Maxime BLAISE
  */
 public class MainFrame extends javax.swing.JFrame {
+
+    /**
+     * Liste des rectangles.
+     */
+    protected ListeRectangle listeRectangles = new ListeRectangle();
 
     /**
      * Creates new form MainFrame
@@ -36,6 +43,7 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         createRectangle = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        nombreRectangles = new javax.swing.JTextField();
 
         jButton1.setText("jButton1");
 
@@ -71,7 +79,9 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(250, 250, 250)
+                        .addGap(189, 189, 189)
+                        .addComponent(nombreRectangles, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(createRectangle)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -86,7 +96,9 @@ public class MainFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(createRectangle)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(createRectangle)
+                    .addComponent(nombreRectangles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -99,11 +111,21 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void createRectangleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRectangleActionPerformed
         // TODO add your handling code here:
-        
+
+        Integer i = new Integer(nombreRectangles.getText());
+        Thread t = new Thread(new GenerationRectangle(i));
+        t.start();
+    }//GEN-LAST:event_createRectangleActionPerformed
+
+    public void ajoutRectangleAleatoire() {
+        // Création
         Rectangle r = Rectangle.getRandomRectangle();
         System.out.println(r);
+        // Dessin dans le Panel
         jPanel1.getGraphics().drawRect(r.getSuperieurGauche().getX(), r.getSuperieurGauche().getY(), r.getWidth(), r.getHeight());
-    }//GEN-LAST:event_createRectangleActionPerformed
+        // Ajout à la liste
+        this.listeRectangles.add(r);
+    }
 
     /**
      * @param args the command line arguments
@@ -145,5 +167,33 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField nombreRectangles;
     // End of variables declaration//GEN-END:variables
+
+    class GenerationRectangle implements Runnable {
+
+        int nombre = 1;
+        
+        public GenerationRectangle(int nb) {
+            this.nombre = nb;
+        }
+        
+        @Override
+        public void run() {
+            // On désactive le bouton de génération
+            createRectangle.setEnabled(false);
+            // Parcours
+            for(int i=0;i<this.nombre;i++) {
+                ajoutRectangleAleatoire();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            // On ré-active le bouton de génération
+            createRectangle.setEnabled(true);
+        }
+
+    }
 }

@@ -45,4 +45,27 @@ public class ListeRectangle extends ArrayList<Rectangle>{
        // System.out.println("\tComparaison sur les Y : " + bY);
         return bX && bY;
     }
+    
+    public ListeRectangle trierTableau() {
+        ListeRectangle res = new ListeRectangle();
+        for(int i=0;i<this.size();i++) {
+            int val = this.get(i).x1;
+            int rang = chercherRang(res, val);
+            if(rang == -1) {
+                res.add(this.get(i));
+            } else {
+                res.add(rang, this.get(i));
+            }
+        }
+        return res;
+    }
+    
+    public int chercherRang(ListeRectangle liste, int val) {
+        for(int i=0;i<liste.size();i++) {
+            if(liste.get(i).x1 > val) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

@@ -48,11 +48,13 @@ public class ListeRectangle extends ArrayList<Rectangle> {
     public int balayage() {
         // Initialisation
         int nbPaires = 0;
+        int Rx2;
+        int RCx1;
         // Parcours
         for (int i = 0; i < this.size(); i++) {
-            int Rx2 = this.get(i).x2;
+            Rx2 = this.get(i).x2;
             for (int j = i + 1; j < this.size(); j++) {
-                int RCx1 = this.get(j).x1;
+                RCx1 = this.get(j).x1;
                 if (Rx2 > RCx1) {
                     if (comparerYseulement(this.get(i), this.get(j))) {
                         nbPaires++;

@@ -36,8 +36,13 @@ public class Point {
      * @return Objet Point
      */
     public static Point getRandomPoint() {
+        // Génération de l'abscisse
         int randomX = (int) (Math.random() * (Config.width  - Config.largeurMinimale));
+        randomX = (randomX < Config.marge) ? Config.marge : randomX;
+        // Génération de l'ordonnée
         int randomY = (int) (Math.random() * (Config.height - Config.hauteurMinimale));
+        randomY = (randomY < Config.marge) ? Config.marge : randomY;
+        // Création du point
         return new Point(randomX, randomY);
     }
 

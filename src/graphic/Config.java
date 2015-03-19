@@ -13,6 +13,7 @@ import java.awt.Color;
 public class Config {
     
     public static int width = 600, height = 400;
+    public static int marge = 2;
     
     /**
      * Couleur de la bordure du rectangle.
@@ -23,4 +24,5 @@ public class Config {
      * Dimension minimale d'un rectangle.
      */
     public static int largeurMinimale = 15, hauteurMinimale = 5;
+    
 }

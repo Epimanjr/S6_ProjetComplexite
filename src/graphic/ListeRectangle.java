@@ -20,5 +20,29 @@ public class ListeRectangle extends ArrayList<Rectangle>{
         super();
     }
     
+    public int toutesLesPaires() {
+        // Initialisation
+        int nbPaires = 0;
+        // Parcours
+        for(int i=0;i<this.size();i++) {
+            for(int j=i+1;j<this.size();j++) {
+                if(comparer(this.get(i), this.get(j))) {
+                    nbPaires++;
+                }
+            }
+        }
+        // Retour
+        return nbPaires;
+    }
     
+    public boolean comparer(Rectangle r1, Rectangle r2) {
+        //System.out.println(" *** COMPARAISON DE " + r1 + " ET " + r2 + " ***");
+        // Test sur les X
+        boolean bX = ((r1.x1 > r2.x1) && (r1.x1 < r2.x2)) || ((r2.x1 > r1.x1) && (r2.x1 < r1.x2));
+        //System.out.println("\tComparaison sur les X : " + bX);
+        // Test sur les Y
+        boolean bY = ((r1.y1 < r2.y1) && (r1.y1 > r2.y2)) || ((r2.y1 < r1.y1) && (r2.y1 > r1.y2));
+       // System.out.println("\tComparaison sur les Y : " + bY);
+        return bX && bY;
+    }
 }

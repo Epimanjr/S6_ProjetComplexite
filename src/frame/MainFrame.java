@@ -44,6 +44,7 @@ public class MainFrame extends javax.swing.JFrame {
         createRectangle = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         nombreRectangles = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -72,6 +73,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel1.setText("©Maxime BLAISE, Antoine NOSAL, Geoffrey GAILLARD, Guillaume DENIS");
 
+        jButton2.setText("Vider");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,6 +91,8 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(nombreRectangles, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(createRectangle)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -98,7 +108,8 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createRectangle)
-                    .addComponent(nombreRectangles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombreRectangles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -117,10 +128,17 @@ public class MainFrame extends javax.swing.JFrame {
         t.start();
     }//GEN-LAST:event_createRectangleActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+
+        listeRectangles = new ListeRectangle();
+        jPanel1.repaint();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     public void ajoutRectangleAleatoire() {
         // Création
         Rectangle r = Rectangle.getRandomRectangle();
-        System.out.println(r);
+        //System.out.println(r);
         // Dessin dans le Panel
         jPanel1.getGraphics().drawRect(r.getSuperieurGauche().getX(), r.getSuperieurGauche().getY(), r.getWidth(), r.getHeight());
         // Ajout à la liste
@@ -165,6 +183,7 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createRectangle;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField nombreRectangles;
@@ -173,26 +192,29 @@ public class MainFrame extends javax.swing.JFrame {
     class GenerationRectangle implements Runnable {
 
         int nombre = 1;
-        
+
         public GenerationRectangle(int nb) {
             this.nombre = nb;
         }
-        
+
         @Override
         public void run() {
             // On désactive le bouton de génération
             createRectangle.setEnabled(false);
             // Parcours
-            for(int i=0;i<this.nombre;i++) {
+            for (int i = 0; i < this.nombre; i++) {
                 ajoutRectangleAleatoire();
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+
             }
             // On ré-active le bouton de génération
             createRectangle.setEnabled(true);
+
+            // Affichage des résultats
+            long debut = System.currentTimeMillis();
+            int nb = listeRectangles.toutesLesPaires();
+            long diff = System.currentTimeMillis() - debut;
+            int nbPairesTotal = this.nombre * (this.nombre - 1) / 2;
+            System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
         }
 
     }

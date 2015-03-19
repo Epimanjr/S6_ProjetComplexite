@@ -90,7 +90,7 @@ public class Rectangle {
 
     @Override
     public String toString() {
-        return "Rectangle{" + "superieurGauche=" + superieurGauche + ", width=" + width + ", height=" + height + '}';
+        return "X1="+this.x1 + "; Y1=" + this.y1 + "; X2=" +this.x2 + "; Y2=" +this.y2;
     }
 
 }

@@ -4,7 +4,9 @@ import graphic.Config;
 import graphic.ListeRectangle;
 import graphic.Rectangle;
 import java.awt.Dimension;
+import java.awt.HeadlessException;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -120,9 +122,24 @@ public class MainFrame extends javax.swing.JFrame {
     private void createRectangleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRectangleActionPerformed
         // TODO add your handling code here:
 
-        Integer i = new Integer(nombreRectangles.getText());
-        Thread t = new Thread(new GenerationRectangle(i));
-        t.start();
+        try {
+            // Récupération du nombre
+            Integer i = new Integer(nombreRectangles.getText());
+
+            // Test de la borne
+            if (i > Config.borne) {
+                JOptionPane.showMessageDialog(null, "Veuillez entrer un nombre < " + Config.borne, "Erreur", JOptionPane.ERROR_MESSAGE);
+            } else {
+                // Exécution !!
+                Thread t = new Thread(new GenerationRectangle(i));
+                t.start();
+            }
+        } catch (NumberFormatException | HeadlessException e) {
+            // Erreur, vide ou format incorrect
+            JOptionPane.showMessageDialog(null, "Veuillez entrer un nombre correct", "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_createRectangleActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -135,8 +152,8 @@ public class MainFrame extends javax.swing.JFrame {
     public void ajoutRectangleAleatoire(int i) {
         // Création
         Rectangle r = Rectangle.getRandomRectangle();
-        r.setCouleur(Config.listeCouleurs[i%3]);
-        r.setNum(i+1);
+        r.setCouleur(Config.listeCouleurs[i % 3]);
+        r.setNum(i + 1);
         //System.out.println(r);
 
         // Ajout à la liste

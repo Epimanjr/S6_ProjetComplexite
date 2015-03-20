@@ -30,4 +30,6 @@ public class Config {
         Color.red , Color.GREEN , Color.BLUE
     };
     
+    public static int borne = 100000;
+    
 }

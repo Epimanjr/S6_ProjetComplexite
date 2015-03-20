@@ -135,11 +135,12 @@ public class MainFrame extends javax.swing.JFrame {
     public void ajoutRectangleAleatoire(int i) {
         // Création
         Rectangle r = Rectangle.getRandomRectangle();
-        r.setCouleur(Config.listeCouleurs[i]);
+        r.setCouleur(Config.listeCouleurs[i%3]);
+        r.setNum(i+1);
         //System.out.println(r);
 
         // Ajout à la liste
-        this.listeRectangles.add(r);
+        MainFrame.listeRectangles.add(r);
     }
 
     /**
@@ -200,7 +201,7 @@ public class MainFrame extends javax.swing.JFrame {
             createRectangle.setEnabled(false);
             // Parcours pour ajout
             for (int i = 0; i < this.nombre; i++) {
-                ajoutRectangleAleatoire( (i%3) );
+                ajoutRectangleAleatoire(i);
             }
             // Dessin
             jPanel1.repaint();

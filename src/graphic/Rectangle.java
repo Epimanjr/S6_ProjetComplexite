@@ -36,6 +36,11 @@ public class Rectangle {
      * Couleur du rectangle.
      */
     private Color couleur;
+    
+    /**
+     * Numéro du rectangle.
+     */
+    private int num;
 
     /**
      * Créer un rectangle à partir d'un point et de ses dimensions
@@ -108,12 +113,21 @@ public class Rectangle {
     public void setCouleur(Color couleur) {
         this.couleur = couleur;
     }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
     
     
 
     public void affiche(Graphics g) {
         g.setColor(this.couleur);
         g.drawRect(this.getSuperieurGauche().getX(), this.getSuperieurGauche().getY(), this.getWidth(), this.getHeight());
+        g.drawString("r"+this.num, this.getSuperieurGauche().getX(), this.getSuperieurGauche().getY() - 10);
     }
 
 }

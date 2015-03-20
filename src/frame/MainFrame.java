@@ -4,10 +4,7 @@ import graphic.Config;
 import graphic.ListeRectangle;
 import graphic.Rectangle;
 import java.awt.Dimension;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -18,7 +15,7 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Liste des rectangles.
      */
-    protected ListeRectangle listeRectangles = new ListeRectangle();
+    public static ListeRectangle listeRectangles = new ListeRectangle();
 
     /**
      * Creates new form MainFrame
@@ -40,7 +37,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new Panel();
         createRectangle = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         nombreRectangles = new javax.swing.JTextField();
@@ -135,12 +132,12 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void ajoutRectangleAleatoire() {
+    public void ajoutRectangleAleatoire(int i) {
         // Création
         Rectangle r = Rectangle.getRandomRectangle();
+        r.setCouleur(Config.listeCouleurs[i]);
         //System.out.println(r);
-        // Dessin dans le Panel
-        jPanel1.getGraphics().drawRect(r.getSuperieurGauche().getX(), r.getSuperieurGauche().getY(), r.getWidth(), r.getHeight());
+
         // Ajout à la liste
         this.listeRectangles.add(r);
     }
@@ -201,27 +198,35 @@ public class MainFrame extends javax.swing.JFrame {
         public void run() {
             // On désactive le bouton de génération
             createRectangle.setEnabled(false);
-            // Parcours
+            // Parcours pour ajout
             for (int i = 0; i < this.nombre; i++) {
-                ajoutRectangleAleatoire();
-
+                ajoutRectangleAleatoire( (i%3) );
             }
+            // Dessin
+            jPanel1.repaint();
             // On ré-active le bouton de génération
             createRectangle.setEnabled(true);
 
-            // Affichage des résultats
-            long debut = System.currentTimeMillis();
-            // Triage
-            ListeRectangle liste = listeRectangles.trierTableau();
-            liste.stream().forEach((r) -> { // Affichage
-                System.out.println(r);
-            });
-            //int nb = listeRectangles.toutesLesPaires();
-            int nb = liste.balayage();
-            long diff = System.currentTimeMillis() - debut;
             int nbPairesTotal = this.nombre * (this.nombre - 1) / 2;
+
+            // Affichage des résultats avec le premier algo
+            long debut = System.currentTimeMillis();
+            int nb = listeRectangles.toutesLesPaires();
+            long diff = System.currentTimeMillis() - debut;
             System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
-            
+
+            // Affichage des résultats avec le deuxième algo
+            ListeRectangle liste = listeRectangles.trierTableau();
+
+            debut = System.currentTimeMillis();
+            // Triage
+            /*liste.stream().forEach((r) -> { // Affichage
+             System.out.println(r);
+             });*/
+
+            nb = liste.balayage();
+            diff = System.currentTimeMillis() - debut;
+            System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
 
         }
 

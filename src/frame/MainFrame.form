@@ -83,6 +83,9 @@
           <Dimension value="[600, 400]"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new Panel()"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">

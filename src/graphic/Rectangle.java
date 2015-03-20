@@ -1,5 +1,8 @@
 package graphic;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  *
  * @author Maxime BLAISE
@@ -23,11 +26,16 @@ public class Rectangle {
      * Hauteur du rectangle.
      */
     private int height;
-    
+
     /**
      * Coordonnées nécessaires pour la résolution du problème.
      */
     public int x1, y1, x2, y2;
+    
+    /**
+     * Couleur du rectangle.
+     */
+    private Color couleur;
 
     /**
      * Créer un rectangle à partir d'un point et de ses dimensions
@@ -90,7 +98,22 @@ public class Rectangle {
 
     @Override
     public String toString() {
-        return "X1="+this.x1 + "; Y1=" + this.y1 + "; X2=" +this.x2 + "; Y2=" +this.y2;
+        return "X1=" + this.x1 + "; Y1=" + this.y1 + "; X2=" + this.x2 + "; Y2=" + this.y2;
+    }
+
+    public Color getCouleur() {
+        return couleur;
+    }
+
+    public void setCouleur(Color couleur) {
+        this.couleur = couleur;
+    }
+    
+    
+
+    public void affiche(Graphics g) {
+        g.setColor(this.couleur);
+        g.drawRect(this.getSuperieurGauche().getX(), this.getSuperieurGauche().getY(), this.getWidth(), this.getHeight());
     }
 
 }

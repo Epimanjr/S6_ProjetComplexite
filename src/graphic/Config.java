@@ -2,6 +2,7 @@
 package graphic;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,5 +25,9 @@ public class Config {
      * Dimension minimale d'un rectangle.
      */
     public static int largeurMinimale = 15, hauteurMinimale = 5;
+    
+    public static Color[] listeCouleurs = {
+        Color.red , Color.GREEN , Color.BLUE
+    };
     
 }

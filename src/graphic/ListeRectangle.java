@@ -145,7 +145,6 @@ public class ListeRectangle extends ArrayList<Rectangle> {
     
     /**
      * Tri Fusion d'un tableau de Rectangles
-     * trouvé sur http://fr.wikibooks.org/wiki/Impl%C3%A9mentation_d'algorithmes_classiques/Algorithmes_de_tri/Tri_fusion#Java_ou_C.23
      * @param tabRectangle
      * @param debut
      * @param fin
@@ -154,11 +153,10 @@ public class ListeRectangle extends ArrayList<Rectangle> {
     	int milieu;
     	
     	if(debut < fin){
-    		milieu = (debut+fin-1)/2;
-    		System.out.println(milieu);
+    		milieu = (debut+fin)/2;
     		triFusion(tabRectangle, debut, milieu);
-    		triFusion(tabRectangle, milieu+1, fin-1);
-    		fusionner(tabRectangle, debut, milieu, fin-1);
+    		triFusion(tabRectangle, milieu+1, fin);
+    		fusionner(tabRectangle, debut, milieu, fin);
     	}
     }
     
@@ -171,31 +169,34 @@ public class ListeRectangle extends ArrayList<Rectangle> {
      */
     public static void fusionner(ListeRectangle tabRectangle, int debut, int milieu, int fin){
     	
-    	//nouveau tableau
     	ListeRectangle old = (ListeRectangle) tabRectangle.clone();
-    	ListeRectangle stab1 = new ListeRectangle();
-    	ListeRectangle stab2 = new ListeRectangle();
     	
-    	int m1 = milieu - debut + 1; // indice de la première moitié de save
-    	int m2 = fin - milieu; //indice de la deuxième moitié de save
+    	int m1 = debut;
+    	int m2 = milieu+1;
+    	int i = debut;
     	
-    	for(int i=0; i<m1; i++){
-    		stab1.add(old.get(debut+i));
-    	}
-    	for(int i=0; i<m2; i++){
-    		stab2.add(old.get(milieu+i));
-    	}
-    	
-    	int i=0;
-    	int j=0;
-    	for(int k=debut; k<fin; k++){
-    		if(stab1.get(i).x1 < stab2.get(j).x1){
-    			tabRectangle.set(k,stab1.get(i));
-    			i++;
+    	while(m1 <= milieu && m2 <= fin){
+    		if(old.get(m1).x1 <= old.get(m2).x1){
+    			tabRectangle.set(i,old.get(m1));
+    			m1++;
     		}
     		else {
-    			tabRectangle.set(k,stab2.get(j));
-    			j++;
+    			tabRectangle.set(i,old.get(m2));
+    			m2++;
+    		}
+    		i++;
+    	}
+    	
+    	if(i<=fin){
+    		while(m1<=milieu){
+    			tabRectangle.set(i,old.get(m1));
+    			m1++;
+    			i++;
+    		}
+    		while(m2<=fin){
+    			tabRectangle.set(i,old.get(m2));
+    			m2++;
+    			i++;
     		}
     	}
     }

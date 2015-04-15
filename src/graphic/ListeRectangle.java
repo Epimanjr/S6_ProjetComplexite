@@ -150,7 +150,7 @@ public class ListeRectangle extends ArrayList<Rectangle> {
      * @param debut
      * @param fin
      */
-    public static void triFusion(Rectangle[] tabRectangle, int debut, int fin){
+    public static void triFusion(ArrayList<Rectangle> tabRectangle, int debut, int fin){
     	int milieu;
     	
     	if(debut < fin){
@@ -168,39 +168,43 @@ public class ListeRectangle extends ArrayList<Rectangle> {
      * @param milieu
      * @param fin
      */
-    public static void fusionner(Rectangle[] tabRectangle, int debut, int milieu, int fin){
+    public static void fusionner(ArrayList<Rectangle> tabRectangle, int debut, int milieu, int fin){
     	
     	//nouveau tableau
-    	Rectangle[] tmp = new Rectangle[fin+1];
+    	ArrayList<Rectangle> tmp = new ArrayList<Rectangle>(fin+1);
     	
     	int moitie1 = debut; // indice de la première moitié de save
     	int moitie2 = milieu+1; //indice de la deuxième moitié de save
     	int i = debut; //indice dans tabRectangle
+    	Rectangle r1;
+    	Rectangle r2;
     	
     	//tant qu'on ne sort pas des sous tableaux
     	while(moitie1 <= milieu && moitie2 <= fin){
+    		r1 = tabRectangle.get(moitie1);
+    		r2 = tabRectangle.get(moitie2);
     		// si le x1 du premier élément du premier tableau est inférieur à celui du 2e tableau
-    		if(tabRectangle[moitie1].x1 <= tabRectangle[moitie2].x1){
-    			tmp[i] = tabRectangle[moitie1];
+    		if(r1.x1 <= r2.x1){
+    			tmp.add(r1);
     			moitie1++;
     		}
     		else {
-    			tmp[i] = tabRectangle[moitie2];
+    			tmp.add(r2);
     			moitie2++;
     		}
-    		i++;
+    		//i++;
     	}
     	//on fusionne les tableaux
     	if(i <= fin){
     		while(moitie1 <= milieu){
-    			tmp[i] = tabRectangle[moitie1];
+    			tmp.add(tabRectangle.get(moitie1));
     			moitie1++;
-    			i++;
+    			//i++;
     		}
     		while(moitie2 <= fin){
-    			tmp[i] = tabRectangle[moitie2];
+    			tmp.add(tabRectangle.get(moitie2));
     			moitie2++;
-    			i++;
+    			//i++;
     		}
     	}
     	tabRectangle = tmp;

@@ -150,14 +150,15 @@ public class ListeRectangle extends ArrayList<Rectangle> {
      * @param debut
      * @param fin
      */
-    public static void triFusion(ArrayList<Rectangle> tabRectangle, int debut, int fin){
+    public static void triFusion(ListeRectangle tabRectangle, int debut, int fin){
     	int milieu;
     	
     	if(debut < fin){
-    		milieu = (debut+fin)/2;
+    		milieu = (debut+fin-1)/2;
+    		System.out.println(milieu);
     		triFusion(tabRectangle, debut, milieu);
-    		triFusion(tabRectangle, milieu+1, fin);
-    		fusionner(tabRectangle, debut, milieu, fin);
+    		triFusion(tabRectangle, milieu+1, fin-1);
+    		fusionner(tabRectangle, debut, milieu, fin-1);
     	}
     }
     
@@ -168,45 +169,34 @@ public class ListeRectangle extends ArrayList<Rectangle> {
      * @param milieu
      * @param fin
      */
-    public static void fusionner(ArrayList<Rectangle> tabRectangle, int debut, int milieu, int fin){
+    public static void fusionner(ListeRectangle tabRectangle, int debut, int milieu, int fin){
     	
     	//nouveau tableau
-    	ArrayList<Rectangle> tmp = new ArrayList<Rectangle>(fin+1);
+    	ListeRectangle old = (ListeRectangle) tabRectangle.clone();
+    	ListeRectangle stab1 = new ListeRectangle();
+    	ListeRectangle stab2 = new ListeRectangle();
     	
-    	int moitie1 = debut; // indice de la première moitié de save
-    	int moitie2 = milieu+1; //indice de la deuxième moitié de save
-    	int i = debut; //indice dans tabRectangle
-    	Rectangle r1;
-    	Rectangle r2;
+    	int m1 = milieu - debut + 1; // indice de la première moitié de save
+    	int m2 = fin - milieu; //indice de la deuxième moitié de save
     	
-    	//tant qu'on ne sort pas des sous tableaux
-    	while(moitie1 <= milieu && moitie2 <= fin){
-    		r1 = tabRectangle.get(moitie1);
-    		r2 = tabRectangle.get(moitie2);
-    		// si le x1 du premier élément du premier tableau est inférieur à celui du 2e tableau
-    		if(r1.x1 <= r2.x1){
-    			tmp.add(r1);
-    			moitie1++;
+    	for(int i=0; i<m1; i++){
+    		stab1.add(old.get(debut+i));
+    	}
+    	for(int i=0; i<m2; i++){
+    		stab2.add(old.get(milieu+i));
+    	}
+    	
+    	int i=0;
+    	int j=0;
+    	for(int k=debut; k<fin; k++){
+    		if(stab1.get(i).x1 < stab2.get(j).x1){
+    			tabRectangle.set(k,stab1.get(i));
+    			i++;
     		}
     		else {
-    			tmp.add(r2);
-    			moitie2++;
-    		}
-    		//i++;
-    	}
-    	//on fusionne les tableaux
-    	if(i <= fin){
-    		while(moitie1 <= milieu){
-    			tmp.add(tabRectangle.get(moitie1));
-    			moitie1++;
-    			//i++;
-    		}
-    		while(moitie2 <= fin){
-    			tmp.add(tabRectangle.get(moitie2));
-    			moitie2++;
-    			//i++;
+    			tabRectangle.set(k,stab2.get(j));
+    			j++;
     		}
     	}
-    	tabRectangle = tmp;
     }
 }

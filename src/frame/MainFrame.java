@@ -235,10 +235,10 @@ public class MainFrame extends javax.swing.JFrame {
             
             debut = System.currentTimeMillis();
             
-            ListeRectangle.triFusion(listeRectangles, 0, listeRectangles.size()-1);
+            ListeRectangle.triFusion(listeRectangles, 0, listeRectangles.size());
             
 
-//            // Affichage des résultats avec le deuxième algo
+            // Affichage des résultats avec le deuxième algo
 //            ListeRectangle liste = listeRectangles.trierTableau();
 //            listeRectangles = liste;
 

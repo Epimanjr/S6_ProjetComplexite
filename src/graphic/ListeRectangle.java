@@ -145,15 +145,15 @@ public class ListeRectangle extends ArrayList<Rectangle> {
     
     /**
      * Tri Fusion d'un tableau de Rectangles
+     * Cet algorithme est optimal pour les tableaux de grande taille
      * @param tabRectangle
      * @param debut
      * @param fin
      */
     public static void triFusion(ListeRectangle tabRectangle, int debut, int fin){
-    	int milieu;
-    	
+ 
     	if(debut < fin){
-    		milieu = (debut+fin)/2;
+    		int milieu = (debut+fin)/2;
     		triFusion(tabRectangle, debut, milieu);
     		triFusion(tabRectangle, milieu+1, fin);
     		fusionner(tabRectangle, debut, milieu, fin);
@@ -161,21 +161,23 @@ public class ListeRectangle extends ArrayList<Rectangle> {
     }
     
     /**
-     * 
-     * @param tabRectangle
-     * @param debut
-     * @param milieu
-     * @param fin
+     * Fusion de tableaux
+     * @param tabRectangle le tableau de départ
+     * @param debut l'indice de début
+     * @param milieu l'indice du milieu
+     * @param fin l'indice de fin
      */
     public static void fusionner(ListeRectangle tabRectangle, int debut, int milieu, int fin){
     	
+    	//sauvegarde du tableau
     	ListeRectangle old = (ListeRectangle) tabRectangle.clone();
     	
-    	int m1 = debut;
-    	int m2 = milieu+1;
-    	int i = debut;
+    	int m1 = debut; //indice de départ du sous tableau 1
+    	int m2 = milieu+1; //indice de départ du sous tableau 2
+    	int i = debut; //indice dans tabRectangle
     	
     	while(m1 <= milieu && m2 <= fin){
+    		//comparaison et ajout à la bonne place dans tabRectangle
     		if(old.get(m1).x1 <= old.get(m2).x1){
     			tabRectangle.set(i,old.get(m1));
     			m1++;
@@ -187,6 +189,7 @@ public class ListeRectangle extends ArrayList<Rectangle> {
     		i++;
     	}
     	
+    	//fusion des sous-tableaux
     	if(i<=fin){
     		while(m1<=milieu){
     			tabRectangle.set(i,old.get(m1));

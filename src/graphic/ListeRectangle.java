@@ -145,7 +145,7 @@ public class ListeRectangle extends ArrayList<Rectangle> {
     
     /**
      * Tri Fusion d'un tableau de Rectangles
-     * trouvé sur http://fr.wikibooks.org/
+     * trouvé sur http://fr.wikibooks.org/wiki/Impl%C3%A9mentation_d'algorithmes_classiques/Algorithmes_de_tri/Tri_fusion#Java_ou_C.23
      * @param tabRectangle
      * @param debut
      * @param fin

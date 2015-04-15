@@ -235,23 +235,17 @@ public class MainFrame extends javax.swing.JFrame {
             
             debut = System.currentTimeMillis();
             
+            //tri du tableau avec tri fusion
             ListeRectangle.triFusion(listeRectangles, 0, listeRectangles.size()-1);
             
-
             // Affichage des résultats avec le deuxième algo
 //            ListeRectangle liste = listeRectangles.trierTableau();
 //            listeRectangles = liste;
 
-            // Triage
-            /*liste.stream().forEach((r) -> { // Affichage
-             System.out.println(r);
-             });*/
-
             nb = listeRectangles.balayage();
             diff = System.currentTimeMillis() - debut;
             System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
-            
-            System.out.println(listeRectangles);
+
         }
 
     }

@@ -232,19 +232,30 @@ public class MainFrame extends javax.swing.JFrame {
             int nb = listeRectangles.toutesLesPaires();
             long diff = System.currentTimeMillis() - debut;
             System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
-
-            // Affichage des résultats avec le deuxième algo
-            ListeRectangle liste = listeRectangles.trierTableau();
-
+            
+            Rectangle[] tab = new Rectangle[listeRectangles.size()];
+            tab = listeRectangles.toArray(tab);
+            
             debut = System.currentTimeMillis();
+            ListeRectangle.triFusion(tab, 0, listeRectangles.size()-1);
+            diff = System.currentTimeMillis() - debut;
+            
+            System.out.println(diff);
+            
+            debut = System.currentTimeMillis();
+            // Affichage des résultats avec le deuxième algo
+            ListeRectangle liste = listeRectangles.trierTableau(); 
+            diff = System.currentTimeMillis() - debut;
+            
+            System.out.println(diff);
             // Triage
             /*liste.stream().forEach((r) -> { // Affichage
              System.out.println(r);
              });*/
 
-            nb = liste.balayage();
-            diff = System.currentTimeMillis() - debut;
-            System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
+//            nb = liste.balayage();
+//            diff = System.currentTimeMillis() - debut;
+//            System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
 
         }
 

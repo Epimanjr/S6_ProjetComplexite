@@ -116,6 +116,7 @@ public class ListeRectangle extends ArrayList<Rectangle> {
             int val = this.get(i).x1;
             //recherche du rang du rectangle
             int rang = chercherRang(res, val);
+            //insertion à la bonne place
             if (rang == -1) {
                 res.add(this.get(i));
             } else {
@@ -134,10 +135,74 @@ public class ListeRectangle extends ArrayList<Rectangle> {
     public int chercherRang(ListeRectangle liste, int val) {
     	//parcours de la liste
         for (int i = 0; i < liste.size(); i++) {
+        	//si le rectangle d'indice i a un x1 plus grand que val 
             if (liste.get(i).x1 > val) {
                 return i;
             }
         }
         return -1;
+    }
+    
+    /**
+     * Tri Fusion d'un tableau de Rectangles
+     * trouvé sur http://fr.wikibooks.org/
+     * @param tabRectangle
+     * @param debut
+     * @param fin
+     */
+    public static void triFusion(Rectangle[] tabRectangle, int debut, int fin){
+    	int milieu;
+    	
+    	if(debut < fin){
+    		milieu = (debut+fin)/2;
+    		triFusion(tabRectangle, debut, milieu);
+    		triFusion(tabRectangle, milieu+1, fin);
+    		fusionner(tabRectangle, debut, milieu, fin);
+    	}
+    }
+    
+    /**
+     * 
+     * @param tabRectangle
+     * @param debut
+     * @param milieu
+     * @param fin
+     */
+    public static void fusionner(Rectangle[] tabRectangle, int debut, int milieu, int fin){
+    	
+    	//nouveau tableau
+    	Rectangle[] tmp = new Rectangle[fin+1];
+    	
+    	int moitie1 = debut; // indice de la première moitié de save
+    	int moitie2 = milieu+1; //indice de la deuxième moitié de save
+    	int i = debut; //indice dans tabRectangle
+    	
+    	//tant qu'on ne sort pas des sous tableaux
+    	while(moitie1 <= milieu && moitie2 <= fin){
+    		// si le x1 du premier élément du premier tableau est inférieur à celui du 2e tableau
+    		if(tabRectangle[moitie1].x1 <= tabRectangle[moitie2].x1){
+    			tmp[i] = tabRectangle[moitie1];
+    			moitie1++;
+    		}
+    		else {
+    			tmp[i] = tabRectangle[moitie2];
+    			moitie2++;
+    		}
+    		i++;
+    	}
+    	//on fusionne les tableaux
+    	if(i <= fin){
+    		while(moitie1 <= milieu){
+    			tmp[i] = tabRectangle[moitie1];
+    			moitie1++;
+    			i++;
+    		}
+    		while(moitie2 <= fin){
+    			tmp[i] = tabRectangle[moitie2];
+    			moitie2++;
+    			i++;
+    		}
+    	}
+    	tabRectangle = tmp;
     }
 }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Config {
     
-    public static int width = 800, height = 800;
+    public static int width = 600, height = 600;
     public static int marge = 2;
     
     /**

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Maxime
+ * @author Maxime BLAISE, Guillaume DENIS, Antoine NOSAL
  */
 public class ListeRectangle extends ArrayList<Rectangle> {
 
@@ -20,10 +20,14 @@ public class ListeRectangle extends ArrayList<Rectangle> {
         super();
     }
 
+    /**
+     * Compare tous les rectangles deux à deux
+     * @return Le nombre de paires se coupant
+     */
     public int toutesLesPaires() {
         // Initialisation
         int nbPaires = 0;
-        // Parcours
+        // Parcours de tous les rectangles
         for (int i = 0; i < this.size(); i++) {
             for (int j = i + 1; j < this.size(); j++) {
                 if (comparer(this.get(i), this.get(j))) {
@@ -31,11 +35,13 @@ public class ListeRectangle extends ArrayList<Rectangle> {
                 }
             }
         }
-        // Retour
+ 
         return nbPaires;
     }
 
     /**
+     * Alogirthme de balayage
+     * 
      * R: rectangle courant (donc Rx2: x2 de R) 
      * RC: rectangles comparés (donc RCx1: x1 de RC)
      * 
@@ -68,6 +74,12 @@ public class ListeRectangle extends ArrayList<Rectangle> {
         return nbPaires;
     }
 
+    /**
+     * Compare si deux rectangles se coupent
+     * @param r1
+     * @param r2
+     * @return boolean
+     */
     public boolean comparer(Rectangle r1, Rectangle r2) {
         //System.out.println(" *** COMPARAISON DE " + r1 + " ET " + r2 + " ***");
         // Test sur les X
@@ -78,7 +90,13 @@ public class ListeRectangle extends ArrayList<Rectangle> {
         // System.out.println("\tComparaison sur les Y : " + bY);
         return bX && bY;
     }
-
+    
+    /**
+     * Compare si deux rectangles se coupent en Y seulement
+     * @param r1
+     * @param r2
+     * @return boolean
+     */
     public boolean comparerYseulement(Rectangle r1, Rectangle r2) {
         //System.out.println(" *** COMPARAISON DE " + r1 + " ET " + r2 + " ***");
         // Test sur les Y
@@ -86,11 +104,17 @@ public class ListeRectangle extends ArrayList<Rectangle> {
         // System.out.println("\tComparaison sur les Y : " + bY);
         return bY;
     }
-
+    
+    /**
+     * Permet de trier le tableau de rectangles
+     * @return le tableau trié
+     */
     public ListeRectangle trierTableau() {
         ListeRectangle res = new ListeRectangle();
+        //parcours des rectangles
         for (int i = 0; i < this.size(); i++) {
             int val = this.get(i).x1;
+            //recherche du rang du rectangle
             int rang = chercherRang(res, val);
             if (rang == -1) {
                 res.add(this.get(i));
@@ -101,7 +125,14 @@ public class ListeRectangle extends ArrayList<Rectangle> {
         return res;
     }
 
+    /**
+     * Recherche la place du rectangle en fonction du x1 d'un rectangle
+     * @param liste
+     * @param val 
+     * @return l'indice à insérer
+     */
     public int chercherRang(ListeRectangle liste, int val) {
+    	//parcours de la liste
         for (int i = 0; i < liste.size(); i++) {
             if (liste.get(i).x1 > val) {
                 return i;

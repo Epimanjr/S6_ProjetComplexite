@@ -77,6 +77,25 @@ public class Rectangle {
         return new Rectangle(p1, width, height);
     }
 
+    /**
+     * Génération d'un rectangle pour le jeu de test I
+     * @param n (cf sujet)
+     * @return Rectangle
+     */
+    public static Rectangle getJeuI(int n) {
+        // Point supérieur gauche avec x et y entre 0 et n
+        Point p1 = Point.getRandomPoint(n);
+        // Largeur du rectangle
+        int width = (int) (Math.random() * (n - p1.getX()));
+        width = (width < Config.largeurMinimale) ? Config.largeurMinimale : width;
+        // Hauteur du rectangle
+        int height = (int) (Math.random() * (n - p1.getY()));
+        height = (height < Config.hauteurMinimale) ? Config.hauteurMinimale : height;
+        // Création !
+        return new Rectangle(p1, width, height);
+    }
+    
+    
     public Point getSuperieurGauche() {
         return superieurGauche;
     }

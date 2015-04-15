@@ -151,7 +151,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void ajoutRectangleAleatoire(int i) {
         // Création
-        Rectangle r = Rectangle.getRandomRectangle();
+        //Rectangle r = Rectangle.getRandomRectangle();
+        Rectangle r = Rectangle.getJeuI(i);
         r.setCouleur(Config.listeCouleurs[i % 3]);
         r.setNum(i + 1);
         //System.out.println(r);

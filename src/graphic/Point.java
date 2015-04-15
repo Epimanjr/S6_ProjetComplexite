@@ -45,6 +45,22 @@ public class Point {
         // Création du point
         return new Point(randomX, randomY);
     }
+    
+    /**
+     * Créer un Point aléatoire sur le Panel graphique.
+     *
+     * @return Objet Point
+     */
+    public static Point getRandomPoint(int n) {
+        // Génération de l'abscisse
+        int randomX = (int) (Math.random() * (n  - Config.largeurMinimale));
+        randomX = (randomX < Config.marge) ? Config.marge : randomX;
+        // Génération de l'ordonnée
+        int randomY = (int) (Math.random() * (n - Config.hauteurMinimale));
+        randomY = (randomY < Config.marge) ? Config.marge : randomY;
+        // Création du point
+        return new Point(randomX, randomY);
+    }
 
     public int getX() {
         return x;

@@ -235,6 +235,7 @@ public class MainFrame extends javax.swing.JFrame {
             // On ré-active le bouton de génération
             createRectangle.setEnabled(true);
 
+            long nbPairesTotal = (long)this.nombre * ((long)this.nombre - 1) / 2;
 
             // Affichage des résultats avec le premier algo
 //            long debut = System.currentTimeMillis();

@@ -53,10 +53,10 @@ public class Point {
      */
     public static Point getRandomPoint(int n) {
         // Génération de l'abscisse
-        int randomX = (int) (Math.random() * (n  - Config.largeurMinimale));
+        int randomX = (int) (Math.random() * (Config.largeurCanvas  - Config.largeurMinimale));
         randomX = (randomX < Config.marge) ? Config.marge : randomX;
         // Génération de l'ordonnée
-        int randomY = (int) (Math.random() * (n - Config.hauteurMinimale));
+        int randomY = (int) (Math.random() * (Config.hauteurCanvas - Config.hauteurMinimale));
         randomY = (randomY < Config.marge) ? Config.marge : randomY;
         // Création du point
         return new Point(randomX, randomY);

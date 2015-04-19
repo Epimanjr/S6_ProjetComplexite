@@ -17,19 +17,25 @@ public class Config {
     public static int marge = 2;
     
     /**
+     * Dimention du canvas
+     */
+    
+    public static final int largeurCanvas = 600, hauteurCanvas = 400; 
+    
+    /**
      * Couleur de la bordure du rectangle.
      */
-    public static Color couleurRectangle = new Color(0, 204, 0);
+    public static final Color couleurRectangle = new Color(0, 204, 0);
     
     /**
      * Dimension minimale d'un rectangle.
      */
-    public static int largeurMinimale = 15, hauteurMinimale = 5;
+    public static final int largeurMinimale = 15, hauteurMinimale = 5;
     
-    public static Color[] listeCouleurs = {
+    public static final Color[] listeCouleurs = {
         Color.red , Color.GREEN , Color.BLUE
     };
     
-    public static int borne = 100000;
+    public static final int borne = 100000;
     
 }

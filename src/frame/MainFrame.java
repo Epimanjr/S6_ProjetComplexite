@@ -3,8 +3,10 @@ package frame;
 import graphic.Config;
 import graphic.ListeRectangle;
 import graphic.Rectangle;
+
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -43,6 +45,9 @@ public class MainFrame extends javax.swing.JFrame {
         createRectangle = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         nombreRectangles = new javax.swing.JTextField();
+        
+        nombreRectangles.setText("1000");
+        
         jButton2 = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
@@ -63,7 +68,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
-        createRectangle.setText("Créer les rectangles");
+        createRectangle.setText("Ajouter les rectangles");
         createRectangle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createRectangleActionPerformed(evt);
@@ -119,11 +124,16 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    private int lastUserInput = 0;
+    
     private void createRectangleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRectangleActionPerformed
 
         try {
             // Récupération du nombre
-            Integer i = new Integer(nombreRectangles.getText());
+            Integer i = new Integer(nombreRectangles.getText()) + lastUserInput ;
+            lastUserInput = i;
 
             // Test des bornes
             if (i > Config.borne || i < 1) {
@@ -144,7 +154,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // 
 
-        listeRectangles = new ListeRectangle();
+        listeRectangles.clear();
+        lastUserInput = 0;
         jPanel1.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -161,9 +172,7 @@ public class MainFrame extends javax.swing.JFrame {
         MainFrame.listeRectangles.add(r);
     }
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -207,7 +216,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     class GenerationRectangle implements Runnable {
 
-        int nombre = 1;
+        private int nombre = 1;
 
         public GenerationRectangle(int nb) {
             this.nombre = nb;
@@ -226,7 +235,7 @@ public class MainFrame extends javax.swing.JFrame {
             // On ré-active le bouton de génération
             createRectangle.setEnabled(true);
 
-            int nbPairesTotal = this.nombre * (this.nombre - 1) / 2;
+            Integer nbPairesTotal = this.nombre * (this.nombre - 1) / 2;
 
             // Affichage des résultats avec le premier algo
             long debut = System.currentTimeMillis();
@@ -247,7 +256,7 @@ public class MainFrame extends javax.swing.JFrame {
 
             nb = listeRectangles.balayage();
             diff = System.currentTimeMillis() - debut;
-            System.out.println("2 –> " + nb+" intersection(s) / " + nbPairesTotal + " paires" + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\t Perf: " + diff + "ms");
+            System.out.println("2 –> " + nb +" intersection(s) / " + nbPairesTotal + " paires" + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\t Perf: " + diff + "ms");
             //System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
 
         }

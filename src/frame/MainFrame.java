@@ -291,14 +291,14 @@ public class MainFrame extends javax.swing.JFrame {
             long nbPairesTotal = (long)this.nombre * ((long)this.nombre - 1) / 2;
 
             // Affichage des résultats avec le premier algo
-//            long debut = System.currentTimeMillis();
-//            int nb = listeRectangles.toutesLesPaires();
-//            long diff = System.currentTimeMillis() - debut;
-//            
-//            System.out.println("1 –> " + nb+" intersection(s) / " + nbPairesTotal + " paires" + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\t Perf: " + diff + "ms");
+            long debut = System.currentTimeMillis();
+            int nb = listeRectangles.toutesLesPaires();
+            long diff = System.currentTimeMillis() - debut;
+            
+            System.out.println("1 –> " + nb+" intersection(s) / " + nbPairesTotal + " paires" + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\t Perf: " + diff + "ms");
             //System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
             
-            long debut = System.currentTimeMillis();
+            debut = System.currentTimeMillis();
             
             //tri du tableau avec tri fusion
             ListeRectangle.triFusion(listeRectangles, 0, listeRectangles.size()-1);
@@ -307,8 +307,8 @@ public class MainFrame extends javax.swing.JFrame {
 //            ListeRectangle liste = listeRectangles.trierTableau();
 //            listeRectangles = liste;
 
-            int nb = listeRectangles.balayage();
-            long diff = System.currentTimeMillis() - debut;
+            nb = listeRectangles.balayage();
+            diff = System.currentTimeMillis() - debut;
             System.out.println("2 –> " + nb +" intersection(s) / " + nbPairesTotal + " paires" + " (soit " + (long)(nb * 100.00 / nbPairesTotal) + "%)" + "\t Perf: " + diff + "ms");
             //System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
 

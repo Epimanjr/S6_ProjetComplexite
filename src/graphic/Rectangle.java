@@ -116,10 +116,10 @@ public class Rectangle {
         // Point supérieur gauche avec x et y entre 0 et n
         Point p1 = Point.getRandomPoint(n);
         // Largeur du rectangle
-        int width = (int) (Math.random() * (Math.sqrt(n) - p1.getX()));
+        int width = (int) (Math.random() * (Config.largeurCanvas - p1.getX()));
         width = (width < Config.largeurMinimale) ? Config.largeurMinimale : width;
         // Hauteur du rectangle
-        int height = (int) (Math.random() * (Math.sqrt(n) - p1.getY()));
+        int height = (int) (Math.random() * (Config.hauteurCanvas - p1.getY()));
         height = (height < Config.hauteurMinimale) ? Config.hauteurMinimale : height;
         // Création !
         return new Rectangle(p1, width, height);

@@ -235,27 +235,26 @@ public class MainFrame extends javax.swing.JFrame {
             // On ré-active le bouton de génération
             createRectangle.setEnabled(true);
 
-            Integer nbPairesTotal = this.nombre * (this.nombre - 1) / 2;
 
             // Affichage des résultats avec le premier algo
-            long debut = System.currentTimeMillis();
-            int nb = listeRectangles.toutesLesPaires();
-            long diff = System.currentTimeMillis() - debut;
-            
-            System.out.println("1 –> " + nb+" intersection(s) / " + nbPairesTotal + " paires" + " (soit " + (long)(nb * 100.00 / nbPairesTotal) + "%)" + "\t Perf: " + diff + "ms");
+//            long debut = System.currentTimeMillis();
+//            int nb = listeRectangles.toutesLesPaires();
+//            long diff = System.currentTimeMillis() - debut;
+//            
+//            System.out.println("1 –> " + nb+" intersection(s) / " + nbPairesTotal + " paires" + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\t Perf: " + diff + "ms");
             //System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
             
-            debut = System.currentTimeMillis();
+            long debut = System.currentTimeMillis();
             
             //tri du tableau avec tri fusion
             ListeRectangle.triFusion(listeRectangles, 0, listeRectangles.size()-1);
             
             // Affichage des résultats avec le deuxième algo
-            ListeRectangle liste = listeRectangles.trierTableau();
-            listeRectangles = liste;
+//            ListeRectangle liste = listeRectangles.trierTableau();
+//            listeRectangles = liste;
 
-            nb = listeRectangles.balayage();
-            diff = System.currentTimeMillis() - debut;
+            int nb = listeRectangles.balayage();
+            long diff = System.currentTimeMillis() - debut;
             System.out.println("2 –> " + nb +" intersection(s) / " + nbPairesTotal + " paires" + " (soit " + (long)(nb * 100.00 / nbPairesTotal) + "%)" + "\t Perf: " + diff + "ms");
             //System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
 

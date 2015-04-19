@@ -63,16 +63,16 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
-        createRectangle.setText("Créer rectangle");
+        createRectangle.setText("Créer les rectangles");
         createRectangle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 createRectangleActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("©Maxime BLAISE, Antoine NOSAL, Geoffrey GAILLARD, Guillaume DENIS");
+        jLabel1.setText("© : Maxime BLAISE, Antoine NOSAL, Geoffrey GAILLARD, Guillaume DENIS");
 
-        jButton2.setText("Vider");
+        jButton2.setText("Vider la vue");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -120,15 +120,14 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createRectangleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRectangleActionPerformed
-        // TODO add your handling code here:
 
         try {
             // Récupération du nombre
             Integer i = new Integer(nombreRectangles.getText());
 
-            // Test de la borne
-            if (i > Config.borne) {
-                JOptionPane.showMessageDialog(null, "Veuillez entrer un nombre < " + Config.borne, "Erreur", JOptionPane.ERROR_MESSAGE);
+            // Test des bornes
+            if (i > Config.borne || i < 1) {
+                JOptionPane.showMessageDialog(null, "Veuillez entrer un nombre 0 < n ≤ " + Config.borne, "Erreur", JOptionPane.ERROR_MESSAGE);
             } else {
                 // Exécution !!
                 Thread t = new Thread(new GenerationRectangle(i));
@@ -143,7 +142,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_createRectangleActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // 
 
         listeRectangles = new ListeRectangle();
         jPanel1.repaint();
@@ -233,7 +232,9 @@ public class MainFrame extends javax.swing.JFrame {
             long debut = System.currentTimeMillis();
             int nb = listeRectangles.toutesLesPaires();
             long diff = System.currentTimeMillis() - debut;
-            System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
+            
+            System.out.println("1 –> " + nb+" intersection(s) / " + nbPairesTotal + " paires" + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\t Perf: " + diff + "ms");
+            //System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
             
             debut = System.currentTimeMillis();
             
@@ -246,7 +247,8 @@ public class MainFrame extends javax.swing.JFrame {
 
             nb = listeRectangles.balayage();
             diff = System.currentTimeMillis() - debut;
-            System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
+            System.out.println("2 –> " + nb+" intersection(s) / " + nbPairesTotal + " paires" + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\t Perf: " + diff + "ms");
+            //System.out.println(nb + "/" + nbPairesTotal + " (soit " + (nb * 100 / nbPairesTotal) + "%)" + "\nPerf: " + diff + "ms");
 
         }
 

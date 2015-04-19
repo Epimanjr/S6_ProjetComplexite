@@ -42,7 +42,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jPanel1 = new Panel();
-        createRectangle = new javax.swing.JButton();
+        
+        
+        creerJeuI = new javax.swing.JButton();
+        creerJeuII = new javax.swing.JButton();
+        creerJeuIII = new javax.swing.JButton();
+        
+        
         jLabel1 = new javax.swing.JLabel();
         nombreRectangles = new javax.swing.JTextField();
         
@@ -68,14 +74,34 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 400, Short.MAX_VALUE)
         );
 
-        createRectangle.setText("Ajouter les rectangles");
-        createRectangle.addActionListener(new java.awt.event.ActionListener() {
+        creerJeuI.setText("Ajouter un jeu (i)");
+        creerJeuII.setText("Ajouter un jeu (ii)");
+        creerJeuIII.setText("Ajouter un jeu (iii)");
+        
+        
+        
+        creerJeuI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	typeJeu = "i";
+                createRectangleActionPerformed(evt);
+            }
+        });
+        
+        creerJeuII.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	typeJeu = "ii";
+                createRectangleActionPerformed(evt);
+            }
+        });
+        
+        creerJeuIII.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	typeJeu = "iii";
                 createRectangleActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("© : Maxime BLAISE, Antoine NOSAL, Geoffrey GAILLARD, Guillaume DENIS");
+        jLabel1.setText("© : Maxime BLAISE, Antoine NOSAL, Geoffrey GAILLARD, Guillaume DENIS, Ersagun YALCINTEPE");
 
         jButton2.setText("Vider la vue");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -91,10 +117,14 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
+                        .addGap(40, 40, 40)
                         .addComponent(nombreRectangles, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(createRectangle)
+                        .addComponent(creerJeuI)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(creerJeuII)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(creerJeuIII)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -103,15 +133,17 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 197, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(0, 50, 50)
+                                .addComponent(jLabel1, 400, 403, 600)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(createRectangle)
+                    .addComponent(creerJeuI)
+                    .addComponent(creerJeuII)
+                    .addComponent(creerJeuIII)
                     .addComponent(nombreRectangles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -126,6 +158,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     
     
+    private String typeJeu = "";
     private int lastUserInput = 0;
     
     private void createRectangleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createRectangleActionPerformed
@@ -159,14 +192,27 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel1.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void ajoutRectangleAleatoire(int i) {
+    public void ajoutRectangleAleatoire(int i, String jeu) {
         // Création
-        Rectangle r = Rectangle.getJeuI(i*100);
-        //Rectangle r = Rectangle.getJeuII(i*100);
-        //Rectangle r = Rectangle.getJeuIII(i*100);
+        Rectangle r = null;
+        
+        switch (jeu) {
+		case "i":
+			r = Rectangle.getJeuI(i*100);
+			break;
+		case "ii":
+			r = Rectangle.getJeuII(i*100);
+			break;
+		case "iii":
+			r = Rectangle.getJeuIII(i*100);
+			break;
+
+		default:
+			break;
+		}
         r.setCouleur(Config.listeCouleurs[i % 3]);
         r.setNum(i + 1);
-        //System.out.println(r);
+       
 
         // Ajout à la liste
         MainFrame.listeRectangles.add(r);
@@ -206,7 +252,10 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton createRectangle;
+    private javax.swing.JButton creerJeuI;
+    private javax.swing.JButton creerJeuII;
+    private javax.swing.JButton creerJeuIII;
+    
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -225,15 +274,19 @@ public class MainFrame extends javax.swing.JFrame {
         @Override
         public void run() {
             // On désactive le bouton de génération
-            createRectangle.setEnabled(false);
+            creerJeuI.setEnabled(false);
+            creerJeuII.setEnabled(false);
+            creerJeuIII.setEnabled(false);
             // Parcours pour ajout
             for (int i = 0; i < this.nombre; i++) {
-                ajoutRectangleAleatoire(i);
+                ajoutRectangleAleatoire(i, typeJeu);
             }
             // Dessin
             jPanel1.repaint();
             // On ré-active le bouton de génération
-            createRectangle.setEnabled(true);
+            creerJeuI.setEnabled(true);
+            creerJeuII.setEnabled(true);
+            creerJeuIII.setEnabled(true);
 
             long nbPairesTotal = (long)this.nombre * ((long)this.nombre - 1) / 2;
 
